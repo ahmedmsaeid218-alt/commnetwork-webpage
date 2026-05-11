@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Ports Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f5f2eb;
+    --bg2: #ede9e0;
+    --text: #1a1612;
+    --text-muted: #6b6258;
+    --accent: #c84b2f;
+    --accent2: #2f6bc8;
+    --card: #ffffff;
+    --border: #d4cfc6;
+    --th-bg: #1a1612;
+    --th-text: #f5f2eb;
+    --row-hover: #fdf5ee;
+    --row-even: #faf8f4;
+    --search-bg: #ffffff;
+    --shadow: rgba(26,22,18,0.08);
+  }
+
+  .dark {
+    --bg: #0e0c0a;
+    --bg2: #161310;
+    --text: #f0ece4;
+    --text-muted: #9e9589;
+    --accent: #e8623e;
+    --accent2: #5b9de8;
+    --card: #1c1915;
+    --border: #2e2a24;
+    --th-bg: #f0ece4;
+    --th-text: #0e0c0a;
+    --row-hover: #231f1a;
+    --row-even: #171410;
+    --search-bg: #1c1915;
+    --shadow: rgba(0,0,0,0.4);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Syne', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    transition: background 0.5s, color 0.5s;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    position: relative;
+    padding: 60px 40px 50px;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    opacity: 0.15;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 10%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 1px solid var(--accent2);
+    opacity: 0.12;
+  }
+
+  .header-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  header h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    max-width: 600px;
+  }
+
+  header h1 span {
+    color: var(--accent);
+    display: block;
+  }
+
+  header p {
+    margin-top: 14px;
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 400;
+    max-width: 400px;
+    line-height: 1.6;
+  }
+
+  .header-line {
+    position: absolute;
+    bottom: 0; left: 40px; right: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent) 0%, transparent 60%);
+  }
+
+  /* ─── CONTAINER ─── */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 40px 100px;
+  }
+
+  /* ─── SEARCH ─── */
+  .search-wrapper {
+    position: relative;
+    margin-bottom: 30px;
+    max-width: 460px;
+  }
+
+  .search-wrapper svg {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+
+  .search-wrapper input {
+    width: 100%;
+    padding: 14px 20px 14px 46px;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    background: var(--search-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+
+  .search-wrapper input::placeholder {
+    color: var(--text-muted);
+    letter-spacing: 1px;
+  }
+
+  .search-wrapper input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(200, 75, 47, 0.12);
+  }
+
+  .result-count {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+  }
+
+  .result-count span {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ─── TABLE ─── */
+  .table-wrapper {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px var(--shadow);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead tr {
+    background: var(--th-bg);
+  }
+
+  th {
+    padding: 14px 20px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--th-text);
+    text-align: left;
+    font-weight: 700;
+  }
+
+  th:first-child { border-left: 3px solid var(--accent); }
+
+  td {
+    padding: 15px 20px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  td:first-child {
+    font-family: 'Space Mono', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    border-left: 3px solid transparent;
+  }
+
+  td:nth-child(2) {
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  td:nth-child(3) {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--accent2);
+  }
+
+  td:last-child {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  tbody tr:nth-child(even) td { background: var(--row-even); }
+  tbody tr:last-child td { border-bottom: none; }
+
+  tbody tr:hover td {
+    background: var(--row-hover);
+  }
+
+  tbody tr:hover td:first-child {
+    border-left-color: var(--accent);
+  }
+
+  /* ─── MOON BUTTON (FIXED BOTTOM) ─── */
+  .theme-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--th-bg);
+    border: 2px solid var(--border);
+    color: var(--th-text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px var(--shadow);
+    transition: transform 0.3s, box-shadow 0.3s, background 0.5s, border-color 0.5s;
+    z-index: 999;
+  }
+
+  .theme-btn:hover {
+    transform: translateY(-3px) rotate(15deg);
+    box-shadow: 0 8px 28px var(--shadow);
+  }
+
+  .theme-btn svg {
+    transition: transform 0.5s ease;
+  }
+
+  .theme-btn:active svg {
+    transform: rotate(180deg);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+  }
+
+  /* ─── NO RESULTS ─── */
+  .no-results {
+    display: none;
+    text-align: center;
+    padding: 50px 20px;
+    color: var(--text-muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  .no-results.show { display: block; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-tag">// Reference Guide</div>
+  <h1>Network <span>Ports</span></h1>
+  <p>Essential protocols and services used in modern network communication.</p>
+  <div class="header-line"></div>
+</header>
+
+<div class="container">
+
+  <div class="search-wrapper">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input type="text" id="search" placeholder="port, service, protocol..." autocomplete="off" spellcheck="false">
+  </div>
+
+  <div class="result-count" id="resultCount"></div>
+
+  <div class="table-wrapper">
+    <table id="portsTable">
+      <thead>
+        <tr>
+          <th>Port</th>
+          <th>Service</th>
+          <th>Protocol</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>80</td><td>HTTP</td><td>TCP</td><td>Web browsing (unsecured)</td></tr>
+        <tr><td>443</td><td>HTTPS</td><td>TCP</td><td>Secure web browsing (encrypted)</td></tr>
+        <tr><td>21</td><td>FTP</td><td>TCP</td><td>File transfer (not secure)</td></tr>
+        <tr><td>22</td><td>SSH / SFTP</td><td>TCP</td><td>Secure remote access & file transfer</td></tr>
+        <tr><td>25</td><td>SMTP</td><td>TCP</td><td>Sending emails</td></tr>
+        <tr><td>110</td><td>POP3</td><td>TCP</td><td>Receiving emails (download & delete)</td></tr>
+        <tr><td>143</td><td>IMAP</td><td>TCP</td><td>Receiving emails with synchronization</td></tr>
+        <tr><td>53</td><td>DNS</td><td>TCP/UDP</td><td>Domain name resolution</td></tr>
+        <tr><td>67/68</td><td>DHCP</td><td>UDP/TCP</td><td>Automatic IP address assignment</td></tr>
+        <tr><td>23</td><td>Telnet</td><td>TCP</td><td>Remote access (not secure)</td></tr>
+        <tr><td>3389</td><td>RDP</td><td>TCP</td><td>Remote desktop access</td></tr>
+      </tbody>
+    </table>
+    <div class="no-results" id="noResults">— no results found —</div>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2026 &nbsp;·&nbsp; NETWORK REFERENCE GUIDE
+</footer>
+
+<!-- زرار القمر الثابت في الأسفل -->
+<button class="theme-btn" onclick="toggleDark()" title="Toggle dark mode" aria-label="Toggle dark mode">
+  <svg id="moonIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+  </svg>
+</button>
+
+<script>
+  // Dark mode
+  function toggleDark() {
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
+    const icon = document.getElementById('moonIcon');
+    if (isDark) {
+      icon.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+    } else {
+      icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+    }
+  }
+
+  // Search with live count
+  const searchInput = document.getElementById('search');
+  const rows = document.querySelectorAll('#portsTable tbody tr');
+  const countEl = document.getElementById('resultCount');
+  const noResults = document.getElementById('noResults');
+  const total = rows.length;
+
+  function updateCount(visible) {
+    if (searchInput.value.trim() === '') {
+      countEl.textContent = '';
+    } else {
+      countEl.innerHTML = `<span>${visible}</span> of ${total} results`;
+    }
+    noResults.classList.toggle('show', visible === 0);
+  }
+
+  searchInput.addEventListener('input', function () {
+    const q = this.value.toLowerCase().trim();
+    let visible = 0;
+    rows.forEach(row => {
+      const match = row.innerText.toLowerCase().includes(q);
+      row.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    updateCount(visible);
+  });
+</script>
+
+</body>
+</html>
